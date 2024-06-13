@@ -1,18 +1,19 @@
 import React from 'react';
 import { Button, Card, CardActions, CardContent, CardMedia, Typography, Grid, Rating } from '@mui/material';
 
-function CardList({ data, handlePostSaveItem }) {
+function CardList({ data, handlePostSaveItem, bool, handleRemove }) {
+
   return (
     <Grid container spacing={2}>
       {data && data.map((item) => (
         <Grid item key={item.id} xs={12} sm={6} md={4} lg={3}>
-          <Card sx={{ 
-            width: '100%', 
-            height: '100%', 
-            m: 2, 
-            boxShadow: 3, 
-            transition: 'transform 0.2s', 
-            '&:hover': { transform: 'scale(1.05)' } 
+          <Card sx={{
+            width: '100%',
+            height: '100%',
+            m: 2,
+            boxShadow: 3,
+            transition: 'transform 0.2s',
+            '&:hover': { transform: 'scale(1.05)' }
           }}>
             <CardMedia
               component="img"
@@ -31,13 +32,25 @@ function CardList({ data, handlePostSaveItem }) {
             </CardContent>
             {typeof window !== 'undefined' && window.localStorage.getItem('token') && (
               <CardActions>
-                <Button 
-                  size="small" 
-                  sx={{ backgroundColor: 'lightgreen', '&:hover': { backgroundColor: 'lightgreen' } }} 
+                <Button
+                  size="small"
+                  sx={{ backgroundColor: 'lightgreen', '&:hover': { backgroundColor: 'lightgreen', color: "black" } }}
                   onClick={() => handlePostSaveItem(item.id)}
                 >
                   Save
                 </Button>
+                {
+                  bool && (
+                    <Button
+                      size="small"
+                      sx={{ backgroundColor: 'lightcoral', color: "black", '&:hover': { backgroundColor: 'lightcoral', color: "#A52A2A" } }}
+                      onClick={() => handleRemove(item.itemId)}
+                    >
+                      Remove
+                    </Button>
+                  )
+
+                }
               </CardActions>
             )}
           </Card>

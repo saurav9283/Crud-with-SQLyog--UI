@@ -1,17 +1,12 @@
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -24,7 +19,6 @@ const Navbar = () => {
             navigate(path);
         } else {
             toast.error('Please log in first');
-            // navigate('/login');
         }
     };
 

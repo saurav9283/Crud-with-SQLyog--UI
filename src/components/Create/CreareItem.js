@@ -15,7 +15,8 @@ function ResponsiveForm() {
     e.preventDefault();
     console.log({ imageUrl, name, description });
     const response = await axios.post("http://localhost:5000/create", { name, imageUrl, rating, description })
-    toast.success("Item created successfully");
+    if (response.status === 400) return toast.error("Item creation failed");
+    if (response.status === 200) return toast.success("Item created successfully");
     navigate("/")
     // console.log(response.data)
   };
